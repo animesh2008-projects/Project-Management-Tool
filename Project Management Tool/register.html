@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register | FlowForge</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+    <link rel="stylesheet" href="./css/styles.css" />
+  </head>
+  <body class="auth-page">
+    <div class="auth-layout">
+      <section class="auth-panel auth-panel-brand">
+        <div class="space-y-8">
+          <a href="./index.html" class="inline-flex items-center gap-3">
+            <span class="brand-mark">F</span>
+            <div>
+              <p class="brand-title">FlowForge</p>
+              <p class="brand-subtitle">Project delivery made visual</p>
+            </div>
+          </a>
+          <div class="space-y-4">
+            <span class="eyebrow-pill">Start Your Workspace</span>
+            <h1 class="text-4xl font-extrabold leading-tight">
+              Build a smarter project system for your team.
+            </h1>
+            <p class="max-w-md text-sm text-slate-200/90">
+              Create boards, add teammates, assign work, track progress, and show a polished full
+              stack build in your portfolio.
+            </p>
+          </div>
+          <div class="space-y-4 rounded-[28px] border border-white/15 bg-white/10 p-6 backdrop-blur-xl">
+            <div class="flex items-center justify-between">
+              <span class="text-sm font-semibold text-white/80">Includes</span>
+              <span class="rounded-full bg-white/15 px-3 py-1 text-xs font-semibold text-white">Internship-ready</span>
+            </div>
+            <ul class="space-y-3 text-sm text-slate-100/90">
+              <li class="flex items-center gap-3"><i class="bi bi-check2-circle"></i> Group projects and member management</li>
+              <li class="flex items-center gap-3"><i class="bi bi-check2-circle"></i> Kanban board with drag and drop tasks</li>
+              <li class="flex items-center gap-3"><i class="bi bi-check2-circle"></i> Comments, mentions, and live notifications</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="auth-panel auth-panel-form">
+        <div class="flex items-center justify-between">
+          <div>
+            <p class="mini-label">Create Account</p>
+            <h2 class="text-3xl font-extrabold">Register</h2>
+          </div>
+          <button type="button" class="theme-toggle-btn" data-theme-toggle aria-label="Toggle theme">
+            <i class="bi bi-moon-stars"></i>
+          </button>
+        </div>
+
+        <form id="registerForm" class="mt-8 space-y-5">
+          <div>
+            <label for="name" class="form-label">Full Name</label>
+            <input id="name" name="name" type="text" class="form-input" placeholder="Alex Morgan" required />
+          </div>
+          <div>
+            <label for="email" class="form-label">Email Address</label>
+            <input id="email" name="email" type="email" class="form-input" placeholder="you@example.com" required />
+          </div>
+          <div>
+            <label for="password" class="form-label">Password</label>
+            <input id="password" name="password" type="password" class="form-input" placeholder="At least 6 characters" minlength="6" required />
+          </div>
+          <div>
+            <label for="role" class="form-label">Role</label>
+            <select id="role" name="role" class="form-input">
+              <option value="member">Member</option>
+              <option value="manager">Manager</option>
+              <option value="admin">Admin</option>
+            </select>
+          </div>
+          <button type="submit" class="primary-button w-full justify-center">
+            Create Account
+            <i class="bi bi-stars text-sm"></i>
+          </button>
+        </form>
+
+        <p class="mt-6 text-center text-sm text-slate-500 dark:text-slate-400">
+          Already have an account?
+          <a href="./login.html" class="font-semibold text-teal-600 dark:text-teal-300">Log in</a>
+        </p>
+      </section>
+    </div>
+
+    <script src="./js/app.js"></script>
+    <script src="./js/api.js"></script>
+    <script src="./js/register.js"></script>
+  </body>
+</html>

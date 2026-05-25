@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard | FlowForge</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+    <link rel="stylesheet" href="./css/styles.css" />
+  </head>
+  <body class="dashboard-page">
+    <div class="dashboard-shell">
+      <aside id="sidebar" class="sidebar-panel">
+        <div class="space-y-8">
+          <div class="flex items-center justify-between">
+            <a href="./index.html" class="flex items-center gap-3">
+              <span class="brand-mark">F</span>
+              <div>
+                <p class="brand-title">FlowForge</p>
+                <p class="brand-subtitle">Execution workspace</p>
+              </div>
+            </a>
+            <button id="closeSidebarBtn" class="theme-toggle-btn lg:hidden" type="button">
+              <i class="bi bi-x-lg"></i>
+            </button>
+          </div>
+
+          <nav class="space-y-2">
+            <button class="sidebar-link is-active" data-scroll-target="overviewSection">
+              <i class="bi bi-grid-1x2-fill"></i>
+              Overview
+            </button>
+            <button class="sidebar-link" data-scroll-target="projectsSection">
+              <i class="bi bi-folder2-open"></i>
+              Projects
+            </button>
+            <button class="sidebar-link" data-scroll-target="boardSection">
+              <i class="bi bi-kanban-fill"></i>
+              Board
+            </button>
+            <button class="sidebar-link" data-scroll-target="insightsSection">
+              <i class="bi bi-bell-fill"></i>
+              Alerts
+            </button>
+          </nav>
+
+          <section class="surface-card p-4">
+            <p class="mini-label">Current Team</p>
+            <div id="teamMembers" class="mt-4 space-y-3">
+              <p class="empty-copy">Select or create a project to see collaborators.</p>
+            </div>
+          </section>
+
+          <section class="surface-card p-4">
+            <p class="mini-label">Quick Actions</p>
+            <div class="mt-4 grid gap-3">
+              <button id="openProjectModalSidebarBtn" class="secondary-button justify-center">New Project</button>
+              <button id="openTaskModalSidebarBtn" class="ghost-button justify-center">New Task</button>
+            </div>
+          </section>
+        </div>
+      </aside>
+
+      <div class="dashboard-content">
+        <header class="topbar-panel">
+          <div class="flex items-center gap-3">
+            <button id="mobileMenuToggle" class="theme-toggle-btn lg:hidden" type="button">
+              <i class="bi bi-list"></i>
+            </button>
+            <div>
+              <p class="mini-label">Workspace</p>
+              <h1 class="text-2xl font-extrabold">Project Dashboard</h1>
+            </div>
+          </div>
+          <div class="topbar-actions">
+            <div class="search-shell">
+              <i class="bi bi-search text-slate-400"></i>
+              <input id="boardSearch" type="search" placeholder="Search tasks, labels, assignees..." />
+            </div>
+            <button type="button" class="theme-toggle-btn" data-theme-toggle aria-label="Toggle theme">
+              <i class="bi bi-moon-stars"></i>
+            </button>
+            <button id="logoutBtn" type="button" class="ghost-button">Logout</button>
+            <div class="user-chip">
+              <div class="user-chip-avatar" id="userInitials">--</div>
+              <div>
+                <p id="userName" class="font-semibold text-slate-900 dark:text-white">Loading...</p>
+                <p id="userRole" class="text-xs text-slate-500 dark:text-slate-400">Role</p>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        <main class="main-panels">
+          <section id="overviewSection" class="space-y-5">
+            <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+              <article class="stat-card">
+                <p class="stat-label">Projects</p>
+                <h2 id="projectsCount" class="stat-value">0</h2>
+                <p class="stat-copy">Active workspaces under your account</p>
+              </article>
+              <article class="stat-card">
+                <p class="stat-label">Open Tasks</p>
+                <h2 id="tasksCount" class="stat-value">0</h2>
+                <p class="stat-copy">Tracked tasks in the selected project</p>
+              </article>
+              <article class="stat-card">
+                <p class="stat-label">Completed</p>
+                <h2 id="completedCount" class="stat-value">0</h2>
+                <p class="stat-copy">Tasks shipped through the board</p>
+              </article>
+              <article class="stat-card">
+                <p class="stat-label">Due Soon</p>
+                <h2 id="dueSoonCount" class="stat-value">0</h2>
+                <p class="stat-copy">Work items closing in on their deadlines</p>
+              </article>
+            </div>
+          </section>
+
+          <section id="projectsSection" class="panel-section">
+            <div class="section-bar">
+              <div>
+                <p class="mini-label">Projects</p>
+                <h2 class="section-title">Team Workspaces</h2>
+              </div>
+              <button id="openProjectModalBtn" class="primary-button">
+                <i class="bi bi-plus-lg"></i>
+                New Project
+              </button>
+            </div>
+            <div id="projectGrid" class="project-grid"></div>
+          </section>
+
+          <section id="boardSection" class="panel-section">
+            <div class="section-bar">
+              <div>
+                <p class="mini-label">Board View</p>
+                <h2 class="section-title">Kanban Workflow</h2>
+              </div>
+              <div class="flex flex-wrap items-center gap-3">
+                <select id="activeProjectSelect" class="compact-input min-w-[220px]"></select>
+                <select id="priorityFilter" class="compact-input min-w-[180px]">
+                  <option value="">All Priorities</option>
+                  <option value="Urgent">Urgent</option>
+                  <option value="High">High</option>
+                  <option value="Medium">Medium</option>
+                  <option value="Low">Low</option>
+                </select>
+                <button id="openTaskModalBtn" class="primary-button">
+                  <i class="bi bi-plus-lg"></i>
+                  New Task
+                </button>
+              </div>
+            </div>
+            <div id="boardEmptyState" class="surface-card hidden p-8 text-center">
+              <h3 class="text-2xl font-extrabold">No active project yet</h3>
+              <p class="mt-2 text-sm text-slate-500 dark:text-slate-400">
+                Create a project to unlock the Kanban board, recent activity, and collaboration features.
+              </p>
+            </div>
+            <div id="boardColumns" class="kanban-grid"></div>
+          </section>
+
+          <section id="insightsSection" class="grid gap-5 xl:grid-cols-[1.2fr_0.8fr]">
+            <article class="surface-card p-6">
+              <div class="section-bar !mb-4">
+                <div>
+                  <p class="mini-label">Recent Activity</p>
+                  <h2 class="section-title">Timeline</h2>
+                </div>
+              </div>
+              <div id="activityFeed" class="timeline-list">
+                <p class="empty-copy">Recent task activity will show up here.</p>
+              </div>
+            </article>
+
+            <article class="space-y-5">
+              <div class="surface-card p-6">
+                <div class="section-bar !mb-4">
+                  <div>
+                    <p class="mini-label">Notifications</p>
+                    <h2 class="section-title">Alerts</h2>
+                  </div>
+                </div>
+                <div id="notificationList" class="space-y-3">
+                  <p class="empty-copy">Notifications will appear here.</p>
+                </div>
+              </div>
+
+              <div class="surface-card p-6">
+                <div class="section-bar !mb-4">
+                  <div>
+                    <p class="mini-label">Upcoming</p>
+                    <h2 class="section-title">Deadlines</h2>
+                  </div>
+                </div>
+                <div id="deadlineList" class="space-y-3">
+                  <p class="empty-copy">Due date reminders will appear here.</p>
+                </div>
+              </div>
+            </article>
+          </section>
+        </main>
+      </div>
+    </div>
+
+    <div id="projectModal" class="modal-backdrop hidden">
+      <div class="modal-shell">
+        <div class="modal-header">
+          <div>
+            <p class="mini-label">Project</p>
+            <h2 id="projectModalTitle" class="text-2xl font-extrabold">Create Project</h2>
+          </div>
+          <button type="button" class="theme-toggle-btn" data-close-modal="projectModal">
+            <i class="bi bi-x-lg"></i>
+          </button>
+        </div>
+        <form id="projectForm" class="space-y-4">
+          <input type="hidden" id="projectId" />
+          <div>
+            <label for="projectTitle" class="form-label">Project Title</label>
+            <input id="projectTitle" type="text" class="form-input" placeholder="Website redesign sprint" required />
+          </div>
+          <div>
+            <label for="projectDescription" class="form-label">Description</label>
+            <textarea id="projectDescription" class="form-input min-h-28" placeholder="Describe the project scope, outcomes, and priorities."></textarea>
+          </div>
+          <div class="grid gap-4 md:grid-cols-2">
+            <div>
+              <label for="projectDeadline" class="form-label">Deadline</label>
+              <input id="projectDeadline" type="date" class="form-input" />
+            </div>
+            <div>
+              <label for="projectMembers" class="form-label">Member Emails</label>
+              <input id="projectMembers" type="text" class="form-input" placeholder="sam@mail.com, lee@mail.com" />
+            </div>
+          </div>
+          <button type="submit" class="primary-button w-full justify-center">Save Project</button>
+        </form>
+      </div>
+    </div>
+
+    <div id="taskModal" class="modal-backdrop hidden">
+      <div class="modal-shell">
+        <div class="modal-header">
+          <div>
+            <p class="mini-label">Task Card</p>
+            <h2 id="taskModalTitle" class="text-2xl font-extrabold">Create Task</h2>
+          </div>
+          <button type="button" class="theme-toggle-btn" data-close-modal="taskModal">
+            <i class="bi bi-x-lg"></i>
+          </button>
+        </div>
+        <form id="taskForm" class="space-y-4">
+          <input type="hidden" id="taskId" />
+          <div>
+            <label for="taskProject" class="form-label">Project</label>
+            <select id="taskProject" class="form-input" required></select>
+          </div>
+          <div>
+            <label for="taskTitle" class="form-label">Task Title</label>
+            <input id="taskTitle" type="text" class="form-input" placeholder="Ship mobile onboarding flow" required />
+          </div>
+          <div>
+            <label for="taskDescription" class="form-label">Description</label>
+            <textarea id="taskDescription" class="form-input min-h-28" placeholder="Add details, blockers, expected deliverables, and context."></textarea>
+          </div>
+          <div class="grid gap-4 md:grid-cols-2">
+            <div>
+              <label for="taskAssignedTo" class="form-label">Assign To</label>
+              <select id="taskAssignedTo" class="form-input">
+                <option value="">Unassigned</option>
+              </select>
+            </div>
+            <div>
+              <label for="taskStatus" class="form-label">Status</label>
+              <select id="taskStatus" class="form-input">
+                <option value="To Do">To Do</option>
+                <option value="In Progress">In Progress</option>
+                <option value="Review">Review</option>
+                <option value="Completed">Completed</option>
+              </select>
+            </div>
+          </div>
+          <div class="grid gap-4 md:grid-cols-2">
+            <div>
+              <label for="taskPriority" class="form-label">Priority</label>
+              <select id="taskPriority" class="form-input">
+                <option value="Low">Low</option>
+                <option value="Medium" selected>Medium</option>
+                <option value="High">High</option>
+                <option value="Urgent">Urgent</option>
+              </select>
+            </div>
+            <div>
+              <label for="taskDueDate" class="form-label">Due Date</label>
+              <input id="taskDueDate" type="date" class="form-input" />
+            </div>
+          </div>
+          <div>
+            <label for="taskLabels" class="form-label">Labels</label>
+            <input id="taskLabels" type="text" class="form-input" placeholder="design, frontend, blockers" />
+          </div>
+          <div>
+            <label for="taskAttachments" class="form-label">Attachments</label>
+            <input id="taskAttachments" type="file" class="form-input" multiple />
+          </div>
+          <button type="submit" class="primary-button w-full justify-center">Save Task</button>
+        </form>
+      </div>
+    </div>
+
+    <aside id="taskDetailDrawer" class="drawer-panel">
+      <div class="drawer-header">
+        <div>
+          <p class="mini-label">Task Details</p>
+          <h2 id="detailTaskTitle" class="text-2xl font-extrabold">Select a task</h2>
+        </div>
+        <button id="closeTaskDrawerBtn" type="button" class="theme-toggle-btn">
+          <i class="bi bi-x-lg"></i>
+        </button>
+      </div>
+      <div class="space-y-6">
+        <div class="surface-card p-5">
+          <div id="detailTaskMeta" class="flex flex-wrap gap-2"></div>
+          <p id="detailTaskDescription" class="mt-4 text-sm leading-7 text-slate-600 dark:text-slate-300">
+            Click any task card to inspect its description, attachments, and activity.
+          </p>
+          <div id="detailTaskLabels" class="mt-4 flex flex-wrap gap-2"></div>
+          <div id="detailTaskAttachments" class="mt-5 space-y-2"></div>
+          <div class="mt-5 flex gap-3">
+            <button id="editTaskFromDrawerBtn" type="button" class="secondary-button">Edit Task</button>
+            <button id="deleteTaskFromDrawerBtn" type="button" class="ghost-button text-rose-500">Delete</button>
+          </div>
+        </div>
+
+        <div class="surface-card p-5">
+          <div class="section-bar !mb-4">
+            <div>
+              <p class="mini-label">Conversation</p>
+              <h3 class="text-xl font-extrabold">Comments</h3>
+            </div>
+          </div>
+          <div id="replyContext" class="hidden rounded-2xl border border-teal-500/20 bg-teal-500/10 px-4 py-3 text-sm text-teal-700 dark:text-teal-200"></div>
+          <form id="commentForm" class="mt-4 space-y-3">
+            <input type="hidden" id="commentTaskId" />
+            <input type="hidden" id="parentCommentId" />
+            <textarea
+              id="commentMessage"
+              class="form-input min-h-28"
+              placeholder="Write a comment... Use @name to mention a teammate."
+              required
+            ></textarea>
+            <div class="flex items-center justify-between gap-3">
+              <p class="text-xs text-slate-500 dark:text-slate-400">
+                Mentions notify assignees and tagged collaborators.
+              </p>
+              <button type="submit" class="primary-button">Post Comment</button>
+            </div>
+          </form>
+          <div id="commentList" class="mt-6 space-y-4"></div>
+        </div>
+      </div>
+    </aside>
+
+    <div id="sidebarOverlay" class="sidebar-overlay hidden"></div>
+
+    <script src="./js/app.js"></script>
+    <script src="./js/api.js"></script>
+    <script src="./js/dashboard.js"></script>
+  </body>
+</html>

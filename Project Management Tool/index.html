@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FlowForge | Project Management Tool</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+    <link rel="stylesheet" href="./css/styles.css" />
+  </head>
+  <body class="landing-page">
+    <header class="sticky top-0 z-40 border-b border-white/10 backdrop-blur-xl">
+      <nav class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
+        <a href="./index.html" class="flex items-center gap-3">
+          <span class="brand-mark">F</span>
+          <div>
+            <p class="brand-title">FlowForge</p>
+            <p class="brand-subtitle">Project Management Tool</p>
+          </div>
+        </a>
+        <div class="hidden items-center gap-8 text-sm font-semibold text-slate-600 lg:flex dark:text-slate-300">
+          <a href="#features">Features</a>
+          <a href="#workflow">Workflow</a>
+          <a href="#stack">Tech Stack</a>
+        </div>
+        <div class="flex items-center gap-3">
+          <button
+            type="button"
+            class="theme-toggle-btn"
+            data-theme-toggle
+            aria-label="Toggle theme"
+          >
+            <i class="bi bi-moon-stars"></i>
+          </button>
+          <a href="./login.html" class="ghost-button hidden sm:inline-flex">Log In</a>
+          <a href="./register.html" class="primary-button">Get Started</a>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero-section overflow-hidden px-4 py-14 sm:px-6 lg:px-8 lg:py-24">
+        <div class="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+          <div class="space-y-8">
+            <span class="eyebrow-pill">Full Stack Portfolio Project</span>
+            <div class="space-y-5">
+              <h1 class="hero-heading max-w-3xl">
+                Organize projects, teams, and delivery timelines in one bold workspace.
+              </h1>
+              <p class="hero-copy max-w-2xl">
+                FlowForge blends Trello-style Kanban boards with Asana-inspired collaboration,
+                real-time updates, secure authentication, smart activity tracking, and a polished
+                modern UI built for internship-ready full stack portfolios.
+              </p>
+            </div>
+            <div class="flex flex-col gap-3 sm:flex-row">
+              <a href="./register.html" class="primary-button">
+                Create Workspace
+                <i class="bi bi-arrow-right-short text-lg"></i>
+              </a>
+              <a href="./login.html" class="secondary-button">Explore Demo Flow</a>
+            </div>
+            <div class="grid gap-4 sm:grid-cols-3">
+              <article class="metric-card">
+                <p class="metric-value">Realtime</p>
+                <p class="metric-label">Socket.IO board sync and live comments</p>
+              </article>
+              <article class="metric-card">
+                <p class="metric-value">Secure</p>
+                <p class="metric-label">JWT auth, hashed passwords, protected routes</p>
+              </article>
+              <article class="metric-card">
+                <p class="metric-value">Responsive</p>
+                <p class="metric-label">Built for desktop, tablet, and mobile screens</p>
+              </article>
+            </div>
+          </div>
+
+          <div class="dashboard-preview">
+            <div class="preview-shell">
+              <div class="preview-topbar">
+                <span class="preview-dot bg-rose-400"></span>
+                <span class="preview-dot bg-amber-400"></span>
+                <span class="preview-dot bg-emerald-400"></span>
+              </div>
+              <div class="grid gap-4 lg:grid-cols-[0.9fr_1.1fr]">
+                <aside class="preview-sidebar">
+                  <p class="text-xs uppercase tracking-[0.3em] text-teal-500">Workspace</p>
+                  <div class="space-y-3">
+                    <div class="preview-sidebar-card is-active">Launch Sprint</div>
+                    <div class="preview-sidebar-card">Design System</div>
+                    <div class="preview-sidebar-card">Hiring Board</div>
+                  </div>
+                  <div class="preview-presence">
+                    <span class="avatar-chip">AN</span>
+                    <span class="avatar-chip">MK</span>
+                    <span class="avatar-chip">SJ</span>
+                    <span class="text-xs font-semibold text-slate-500">3 online</span>
+                  </div>
+                </aside>
+                <div class="space-y-4">
+                  <div class="preview-insight">
+                    <div>
+                      <p class="text-sm font-semibold text-slate-500">Sprint progress</p>
+                      <h2 class="text-2xl font-extrabold text-slate-900 dark:text-white">72%</h2>
+                    </div>
+                    <div class="w-32">
+                      <div class="progress-track">
+                        <div class="progress-fill w-[72%]"></div>
+                      </div>
+                      <p class="mt-2 text-xs text-slate-500">16 of 22 tasks complete</p>
+                    </div>
+                  </div>
+                  <div class="preview-board">
+                    <div class="preview-column">
+                      <div class="preview-column-title">To Do</div>
+                      <div class="preview-task">
+                        <p>Define onboarding tasks</p>
+                        <span class="priority-chip priority-low">Low</span>
+                      </div>
+                    </div>
+                    <div class="preview-column">
+                      <div class="preview-column-title">In Progress</div>
+                      <div class="preview-task">
+                        <p>Build dashboard interactions</p>
+                        <span class="priority-chip priority-high">High</span>
+                      </div>
+                    </div>
+                    <div class="preview-column">
+                      <div class="preview-column-title">Review</div>
+                      <div class="preview-task">
+                        <p>Polish comment experience</p>
+                        <span class="priority-chip priority-medium">Medium</span>
+                      </div>
+                    </div>
+                    <div class="preview-column">
+                      <div class="preview-column-title">Completed</div>
+                      <div class="preview-task">
+                        <p>Secure API with JWT</p>
+                        <span class="priority-chip priority-done">Done</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="features" class="px-4 py-8 sm:px-6 lg:px-8 lg:py-16">
+        <div class="mx-auto max-w-7xl space-y-8">
+          <div class="section-heading">
+            <span class="eyebrow-pill">Why It Stands Out</span>
+            <h2>Everything a modern internship-ready PM tool should demonstrate.</h2>
+          </div>
+          <div class="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+            <article class="feature-card">
+              <i class="bi bi-shield-lock"></i>
+              <h3>Secure Authentication</h3>
+              <p>User registration, login, hashed passwords, JWT sessions, and protected routes.</p>
+            </article>
+            <article class="feature-card">
+              <i class="bi bi-kanban"></i>
+              <h3>Kanban Workflow</h3>
+              <p>Drag and drop tasks across To Do, In Progress, Review, and Completed lanes.</p>
+            </article>
+            <article class="feature-card">
+              <i class="bi bi-people"></i>
+              <h3>Team Collaboration</h3>
+              <p>Invite members, assign tasks, leave threaded comments, and mention teammates.</p>
+            </article>
+            <article class="feature-card">
+              <i class="bi bi-broadcast"></i>
+              <h3>Live Updates</h3>
+              <p>Socket.IO keeps project boards, comments, and notifications synchronized in real time.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="workflow" class="px-4 py-8 sm:px-6 lg:px-8 lg:py-16">
+        <div class="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.95fr_1.05fr]">
+          <div class="surface-card p-8">
+            <span class="eyebrow-pill">Workflow</span>
+            <h2 class="mt-4 text-3xl font-extrabold">From idea to shipped feature in four smooth steps.</h2>
+            <div class="mt-8 space-y-6">
+              <div class="workflow-step">
+                <span>01</span>
+                <div>
+                  <h3>Create a project</h3>
+                  <p>Start with a delivery goal, invite members, and lock in deadlines.</p>
+                </div>
+              </div>
+              <div class="workflow-step">
+                <span>02</span>
+                <div>
+                  <h3>Break work into tasks</h3>
+                  <p>Add priorities, labels, attachments, and assignees for every task card.</p>
+                </div>
+              </div>
+              <div class="workflow-step">
+                <span>03</span>
+                <div>
+                  <h3>Collaborate live</h3>
+                  <p>Comment in context, mention teammates, and track all recent activity.</p>
+                </div>
+              </div>
+              <div class="workflow-step">
+                <span>04</span>
+                <div>
+                  <h3>Track progress visually</h3>
+                  <p>Use insights, due-soon reminders, and live board updates to stay on pace.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid gap-5 md:grid-cols-2">
+            <article class="surface-card p-7">
+              <p class="mini-label">Project View</p>
+              <h3 class="mb-3 text-2xl font-extrabold">Group projects with membership controls</h3>
+              <p class="text-sm text-slate-600 dark:text-slate-300">
+                Add collaborators by email, edit ownership details, and keep every board scoped to
+                the right team.
+              </p>
+            </article>
+            <article class="surface-card p-7">
+              <p class="mini-label">Task View</p>
+              <h3 class="mb-3 text-2xl font-extrabold">Detailed task cards with attachments</h3>
+              <p class="text-sm text-slate-600 dark:text-slate-300">
+                Include priorities, due dates, labels, file uploads, activity history, and live
+                comments inside each card.
+              </p>
+            </article>
+            <article class="surface-card p-7">
+              <p class="mini-label">Dashboard</p>
+              <h3 class="mb-3 text-2xl font-extrabold">Analytics, reminders, and notifications</h3>
+              <p class="text-sm text-slate-600 dark:text-slate-300">
+                Surface overdue tasks, unread mentions, and current workload with an at-a-glance
+                dashboard layout.
+              </p>
+            </article>
+            <article class="surface-card p-7">
+              <p class="mini-label">Deployment</p>
+              <h3 class="mb-3 text-2xl font-extrabold">Ready for Netlify, Vercel, Render, or Atlas</h3>
+              <p class="text-sm text-slate-600 dark:text-slate-300">
+                Ship the frontend and backend independently or host everything behind a single
+                Express deployment.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="stack" class="px-4 py-8 sm:px-6 lg:px-8 lg:py-16">
+        <div class="mx-auto max-w-7xl">
+          <div class="surface-card p-8 lg:p-10">
+            <div class="section-heading mb-8">
+              <span class="eyebrow-pill">Tech Stack</span>
+              <h2>Built with the exact tools most internship reviewers want to see.</h2>
+            </div>
+            <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+              <div class="stack-chip">HTML5 + CSS3</div>
+              <div class="stack-chip">Vanilla JavaScript</div>
+              <div class="stack-chip">Tailwind CSS</div>
+              <div class="stack-chip">Fetch API</div>
+              <div class="stack-chip">Node.js + Express.js</div>
+              <div class="stack-chip">MongoDB + Mongoose</div>
+              <div class="stack-chip">JWT Authentication</div>
+              <div class="stack-chip">Socket.IO Realtime</div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="px-4 py-10 text-center text-sm text-slate-500 sm:px-6 lg:px-8">
+      <p>FlowForge Project Management Tool - Full stack portfolio application</p>
+    </footer>
+
+    <script src="./js/app.js"></script>
+  </body>
+</html>
